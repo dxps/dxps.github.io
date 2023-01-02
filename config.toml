@@ -1,5 +1,5 @@
 # The URL the site will be built for
-base_url = "https://dxps.github.io"
+base_url = "https://dxps.io"
 title = "dxps"
 theme = "sam"
 
