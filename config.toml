@@ -23,8 +23,8 @@ date_format = "%Y-%m-%d"
 # ------------------------------------------------------
 
 sam_menu = [
-    { text = "posts", link = "/posts" },
     { text = "about", link = "/about" },
+    { text = "posts", link = "/posts" },
     # { text = "github", link = "https://github.com/dxps" }
 ]
 
