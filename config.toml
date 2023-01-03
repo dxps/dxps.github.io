@@ -17,8 +17,6 @@ highlight_code = true
 
 [extra]
 # Put all your custom variables here
-show_word_count = false
-show_reading_time = false
 date_format = "%Y-%m-%d"
 
 # ------------------------------------------------------
