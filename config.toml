@@ -24,7 +24,7 @@ date_format = "%Y-%m-%d"
 sam_menu = [
     { text = "about", link = "/about" },
     { text = "posts", link = "/posts" },
-    # { text = "github", link = "https://github.com/dxps" }
+    { text = "github", link = "https://github.com/dxps", new_tab = true }
 ]
 
 sam_bottom_menu = true

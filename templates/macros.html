@@ -26,7 +26,8 @@
     <p>
         {% if config.extra.sam_menu and config.extra.sam_bottom_menu %}
         {% for link in config.extra.sam_menu %}
-        <a href="{{ link.link }}">{{ link.text }}</a>
+        <a {% if link.new_tab %} target="_blank" {% endif %} href="{{ link.link }}">{{ link.text }}
+        </a>
         &#183;
         {% endfor %}
         {% elif config.extra.sam_bottom_menu %}

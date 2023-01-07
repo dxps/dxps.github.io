@@ -52,7 +52,7 @@
         {% if config.extra.sam_menu %}
         {% for link in config.extra.sam_menu %}
         <div class="big-link">
-            <a href="{{ link.link }}">
+            <a {% if link.new_tab %} target="_blank" {% endif %} href="{{ link.link }}">
                 {{ link.text }}
             </a>
         </div>
