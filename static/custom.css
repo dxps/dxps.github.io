@@ -1,0 +1,35 @@
+#content pre {
+	letter-spacing: 0px !important;
+	border-radius: 8px;
+}
+
+#pre {
+	letter-spacing: 0px !important;
+}
+
+/* Table with rounded corners. */
+
+#content table {
+	border-collapse: separate;
+	border: solid rgb(178, 147, 122) 2px;
+	border-radius: 6px;
+}
+
+#content tr,
+#content td,
+#content th {
+	border: none;
+	border-top: solid rgb(178, 147, 122) 2px;
+}
+
+#content td:first-child,
+#content th:first-child,
+#content th:nth-child(n) {
+	border: none;
+}
+
+#content td:nth-child(n) {
+	/*  { */
+	border: none;
+	border-top: solid rgb(178, 147, 122) 1px;
+}
