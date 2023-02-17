@@ -11,6 +11,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="referrer" content="no-referrer">
 
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-92LFH81ZYB"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+
+        gtag('config', 'G-92LFH81ZYB');
+    </script>
+
     <link rel="stylesheet" href="{{ get_url(path='fonts.css') }}">
     <link rel="stylesheet" href="{{ get_url(path='style.css') }}">
     <link rel="stylesheet" href="/custom.css">
@@ -20,6 +29,7 @@
     {% if config.generate_rss %}
     <link rel="alternate" type="application/rss+xml" title="RSS" href="{{ get_url(path='rss.xml') }}">
     {% endif %}
+
 </head>
 
 <body>
