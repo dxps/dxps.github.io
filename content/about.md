@@ -7,9 +7,7 @@ no_header = true
 
 Hi there! 🙋‍♂️
 
-I am Marius Ileana and this is my space of development experiences (aka dxps).
-
-As a perpetual learner, I'll try to keep contributing here, so consider it as a work-in-progress.
+I am Marius Ileana and this is my space of development experiences (aka dxps). As a perpetual learner, I'll try to keep contributing here, so always consider it an ongoing effort.
 
 ---
 
