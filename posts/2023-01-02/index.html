@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="MobileOptimized" content="320">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="referrer" content="no-referrer">
+
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-92LFH81ZYB"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+
+        gtag('config', 'G-92LFH81ZYB');
+    </script>
+
+    <!-- Google Tag Manager -->
+    <script>(function (w, d, s, l, i) {
+            w[l] = w[l] || []; w[l].push({
+                'gtm.start':
+                    new Date().getTime(), event: 'gtm.js'
+            }); var f = d.getElementsByTagName(s)[0],
+                j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''; j.async = true; j.src =
+                    'https://www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f);
+        })(window, document, 'script', 'dataLayer', 'GTM-WMPS95C');</script>
+    <!-- End Google Tag Manager -->
+
+    <link rel="stylesheet" href="/fonts.css">
+    <link rel="stylesheet" href="/style.css">
+    <link rel="stylesheet" href="/custom.css">
+
+    <title>
+    First post
+</title>
+
+    
+
+</head>
+
+<body>
+
+    <!-- Google Tag Manager (noscript) -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-WMPS95C" height="0" width="0"
+            style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
+
+    
+    
+    <div class="breadcrumb-container">
+        <a class="breadcrumb-path" href="/">Home</a>
+        
+        
+        
+        
+        
+        <span class="breadcrumb-separator">/</span>
+        
+        <a class="breadcrumb-path" href="&#x2F;posts&#x2F;">posts</a>
+        
+        <span class="breadcrumb-separator">/</span>
+        <a class="breadcrumb-path active" href="&#x2F;posts&#x2F;2023-01-02&#x2F;">First post</a>
+    </div>
+    
+    
+
+    
+
+<div class="wrap">
+    <div class="section" id="title">
+        
+    First post
+
+    </div>
+    <div class="section" id="sections">
+        
+    </div>
+    <div class="section" id="content">
+        
+    
+        
+            
+
+2023-01-02
+
+        
+        
+            
+                &#183; 148 words
+            
+        
+        
+            
+            
+                &#183; 1 min
+            
+        
+        
+        
+        <hr/>
+    
+    <p>This is the first post while playing with <a target="_blank" href="https://www.getzola.org/">Zola</a> while reconsidering my GitHub Pages website.</p>
+<hr />
+<p>Below it's just testing the rendered result of the markdown content.</p>
+<h1 id="heading-1">Heading 1</h1>
+<p>Some content after it.</p>
+<h2 id="heading-2">Heading 2</h2>
+<p>Some content after it.</p>
+<h2 id="heading-3">Heading 3</h2>
+<p>Some content after it.</p>
+<p><br/><br/></p>
+<p>Unordered (simple) list:</p>
+<ul>
+<li>Item 1
+<ul>
+<li>sub-item 1.1</li>
+</ul>
+</li>
+<li>Item 2</li>
+<li>Item 3</li>
+</ul>
+<p><br/><br/></p>
+<p>Ordered (numbered) list:</p>
+<ol>
+<li>Item 1</li>
+<li>Item 2</li>
+</ol>
+<p><br/><br/></p>
+<pre data-lang="rust" style="background-color:#282828;color:#fdf4c1aa;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#fa5c4b;">fn </span><span style="color:#8ec07c;">routes</span><span>(</span><span style="color:#fdf4c1;">state</span><span>: AppState, </span><span style="color:#fdf4c1;">assets_dir</span><span>: String) -&gt; Router {
+</span><span>    </span><span style="color:#fa5c4b;">let</span><span> tracing_layer </span><span style="color:#fe8019;">= </span><span>TraceLayer::new_for_http();
+</span><span>    
+</span><span>    Router::new()
+</span><span>    .</span><span style="color:#fabd2f;">route</span><span>(</span><span style="color:#b8bb26;">&quot;/api/healthcheck&quot;</span><span>, </span><span style="color:#fabd2f;">get</span><span>(health_check))
+</span><span>    .</span><span style="color:#fabd2f;">route</span><span>(</span><span style="color:#b8bb26;">&quot;/api/users/login&quot;</span><span>, </span><span style="color:#fabd2f;">post</span><span>(login_user))
+</span><span>    .</span><span style="color:#fabd2f;">route</span><span>(</span><span style="color:#b8bb26;">&quot;/api/users&quot;</span><span>, </span><span style="color:#fabd2f;">post</span><span>(register_user))
+</span><span>    </span><span style="font-style:italic;color:#928374;">// ...
+</span><span>        .</span><span style="color:#fabd2f;">layer</span><span>(tracing_layer)
+</span><span>    .</span><span style="color:#fabd2f;">with_state</span><span>(Arc::new(state))
+</span><span>    .</span><span style="color:#fabd2f;">merge</span><span>(SpaRouter::new(</span><span style="color:#b8bb26;">&quot;/assets&quot;</span><span>, assets_dir))
+</span><span>}
+</span></code></pre>
+<p><br/><br/></p>
+<p>And a table:</p>
+<table><thead><tr><th>col 1</th><th>col 2</th><th>col 3</th></tr></thead><tbody>
+<tr><td>data 1</td><td>data 2</td><td></td></tr>
+<tr><td>data 4</td><td>data 5</td><td>data 6</td></tr>
+</tbody></table>
+<p><br/><br/></p>
+<p>And an image:</p>
+<p><img src="/images/dxps_spartan_logo_transp_200x200.png" alt="" /></p>
+
+
+    </div>
+    
+<div class="section bottom-menu">
+    <hr />
+    <p>
+        
+        
+        <a  href="&#x2F;about">about
+        </a>
+        &#183;
+        
+        <a  href="&#x2F;posts">posts
+        </a>
+        &#183;
+        
+        <a  target="_blank"  href="https:&#x2F;&#x2F;github.com&#x2F;dxps">github
+        </a>
+        &#183;
+        
+        
+        <a href="&#x2F;">
+            home
+        </a>
+    </p>
+</div>
+
+    
+
+
+</div>
+
+</body>
+
+</html>
