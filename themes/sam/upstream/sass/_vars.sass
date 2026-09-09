@@ -8,7 +8,7 @@ $body-size: 18px
 // _mixins) is applied both for an explicit [data-theme="dark"] and,
 // absent an explicit choice, for OS-level dark mode.
 
-:root
+html:root
     --bg: #fbf1c7
     --bg-elevated: #f2e5bc
     --text: #3c3836
@@ -25,9 +25,9 @@ $body-size: 18px
     --selection-text: #fbf1c7
     color-scheme: light
 
-:root[data-theme="dark"]
+html:root[data-theme="dark"]
     +dark-palette
 
 @media (prefers-color-scheme: dark)
-    :root:not([data-theme="light"])
+    html:root:not([data-theme="light"])
         +dark-palette
