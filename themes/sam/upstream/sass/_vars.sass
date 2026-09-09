@@ -1,19 +1,33 @@
-$white: #fff
-$black: #111
+$font: 'Crimson Pro', Georgia, 'Times New Roman', serif
+$body-size: 18px
 
-$dxps-orange: #e9cac2
-$dxps-orange-brighter: #f7a18c
+// Color system - CSS custom properties, so the theme can switch at
+// runtime via the toggle button (see the base template) without a
+// rebuild. Both palettes are gruvbox (https://github.com/morhetz/gruvbox):
+// values here are gruvbox light, the dark palette (+dark-palette, in
+// _mixins) is applied both for an explicit [data-theme="dark"] and,
+// absent an explicit choice, for OS-level dark mode.
 
-// $dark-grey: #39424E
-$dark-grey: #3B3837
+:root
+    --bg: #fbf1c7
+    --bg-elevated: #f2e5bc
+    --text: #3c3836
+    --text-muted: #7c6f64
+    --link: #076678
+    --link-hover: #af3a03
+    --border: #d5c4a1
+    --code-bg: #1d2021
+    --code-text: #ebdbb2
+    --button-bg: #3c3836
+    --button-text: #fbf1c7
+    --shadow: rgba(60, 56, 54, 0.25)
+    --selection-bg: #076678
+    --selection-text: #fbf1c7
+    color-scheme: light
 
-$font: 'Didact Gothic','sans serif'
-$body-size: 16px
-$body-text: $white
+:root[data-theme="dark"]
+    +dark-palette
 
-// $links: darken($white, 20%)
-$links: $dxps-orange
-// $links-hover: $white
-$links-hover: $dxps-orange-brighter
-
-$code-block: #000004
+@media (prefers-color-scheme: dark)
+    :root:not([data-theme="light"])
+        +dark-palette

@@ -11,7 +11,7 @@
 
 #content table {
 	border-collapse: separate;
-	border: solid rgb(178, 147, 122) 2px;
+	border: solid var(--border) 2px;
 	border-radius: 6px;
 }
 
@@ -19,7 +19,7 @@
 #content td,
 #content th {
 	border: none;
-	border-top: solid rgb(178, 147, 122) 2px;
+	border-top: solid var(--border) 2px;
 }
 
 #content td:first-child,
@@ -29,7 +29,6 @@
 }
 
 #content td:nth-child(n) {
-	/*  { */
 	border: none;
-	border-top: solid rgb(178, 147, 122) 1px;
+	border-top: solid var(--border) 1px;
 }
