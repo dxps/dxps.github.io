@@ -111,17 +111,19 @@ impl App {
                 .max_rect(row)
                 .layout(Layout::right_to_left(Align::Center)),
             |ui| {
+                // Matches the visual gap above the icon, which comes from centering it in the 32px row.
+                ui.add_space(6.0);
                 let dark = ui.ctx().global_style().visuals.dark_mode;
                 let (icon, next) = if dark {
                     ("☀", ThemePreference::Light)
                 } else {
                     ("🌙", ThemePreference::Dark)
                 };
-                if ui
-                    .button(icon)
-                    .on_hover_text("Toggle light/dark theme")
-                    .clicked()
-                {
+                let toggle = ui
+                    .add(egui::Button::new(egui::RichText::new(icon).size(18.0)).frame(false))
+                    .on_hover_cursor(egui::CursorIcon::PointingHand)
+                    .on_hover_text("Toggle light/dark theme");
+                if toggle.clicked() {
                     ui.ctx().set_theme(next);
                 }
             },
@@ -217,11 +219,13 @@ impl eframe::App for App {
             self.route = from_url;
         }
 
-        egui::Panel::top("nav").show(ui, |ui| {
-            ui.add_space(6.0);
-            self.nav(ui);
-            ui.add_space(6.0);
-        });
+        egui::Panel::top("nav")
+            .show_separator_line(false)
+            .show(ui, |ui| {
+                ui.add_space(6.0);
+                self.nav(ui);
+                ui.add_space(6.0);
+            });
 
         egui::CentralPanel::default().show(ui, |ui| {
             if self.route == Route::Home {
