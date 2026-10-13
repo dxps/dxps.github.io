@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="referrer" content="no-referrer">
+    <meta name="description" content="dxps — Marius Ileana's space of development experiences.">
+    <title>dxps</title>
+
+    <link data-trunk rel="rust" data-wasm-opt="0" />
+    <link data-trunk rel="copy-dir" href="static/images" />
+    <link data-trunk rel="copy-file" href="static/CNAME" />
+    <link data-trunk rel="icon" href="static/favicon.ico" />
+
+    <style>
+        html, body { margin: 0; height: 100%; overflow: hidden; background: #ffffff; }
+        @media (prefers-color-scheme: dark) { html, body { background: #22272e; } }
+        canvas { display: block; width: 100%; height: 100%; }
+        #loading { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center;
+                   font: 16px sans-serif; color: #768390; }
+    </style>
+
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-92LFH81ZYB"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+
+        gtag('config', 'G-92LFH81ZYB');
+    </script>
+
+    <!-- Google Tag Manager -->
+    <script>(function (w, d, s, l, i) {
+            w[l] = w[l] || []; w[l].push({
+                'gtm.start':
+                    new Date().getTime(), event: 'gtm.js'
+            }); var f = d.getElementsByTagName(s)[0],
+                j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''; j.async = true; j.src =
+                    'https://www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f);
+        })(window, document, 'script', 'dataLayer', 'GTM-WMPS95C');</script>
+    <!-- End Google Tag Manager -->
+</head>
+
+<body>
+    <!-- Google Tag Manager (noscript) -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-WMPS95C" height="0" width="0"
+            style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
+
+    <canvas id="app_canvas"></canvas>
+    <div id="loading">Loading…</div>
+    <noscript>This site needs JavaScript and WebAssembly. Find me on <a href="https://github.com/dxps">GitHub</a>.</noscript>
+</body>
+
+</html>

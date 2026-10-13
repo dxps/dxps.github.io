@@ -1,3 +1,2 @@
-
-# This is created and populated while "zola serve" is running.
-public
+/target
+/dist

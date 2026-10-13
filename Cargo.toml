@@ -1,0 +1,23 @@
+[package]
+name = "dxps-site"
+version = "0.1.0"
+edition = "2024"
+publish = false
+
+[dependencies]
+eframe = { version = "0.36", default-features = false, features = ["glow", "default_fonts", "web_screen_reader"] }
+egui_commonmark = { version = "0.25", default-features = false, features = ["load-images", "fetch", "better_syntax_highlighting"] }
+egui_extras = { version = "0.36", features = ["image", "http", "svg"] }
+image = { version = "0.25", default-features = false, features = ["png"] }
+
+[target.'cfg(target_arch = "wasm32")'.dependencies]
+wasm-bindgen-futures = "0.4"
+log = "0.4"
+web-sys = { version = "0.3", features = ["Window", "Document", "Location", "History", "HtmlCanvasElement", "Element"] }
+
+[profile.release]
+opt-level = "s"
+lto = true
+codegen-units = 1
+panic = "abort"
+strip = true
