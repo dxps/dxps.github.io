@@ -7,7 +7,7 @@ fn main() {
     use eframe::wasm_bindgen::JsCast as _;
 
     // Without a logger, eframe's panic messages never reach the browser console.
-    eframe::WebLogger::init(log::LevelFilter::Warn).ok();
+    eframe::WebLogger::init(log::LevelFilter::Error).ok();
 
     wasm_bindgen_futures::spawn_local(async {
         let canvas = web_sys::window()
