@@ -302,10 +302,9 @@ fn icon_button(
     let (rect, response) = ui.allocate_exact_size(egui::vec2(32.0, 32.0), egui::Sense::click());
     if ui.is_rect_visible(rect) {
         let visuals = ui.visuals();
+        // The active item is marked by its tint only; background is reserved for hover.
         let fill = if response.hovered() {
             visuals.widgets.hovered.bg_fill
-        } else if active {
-            visuals.selection.bg_fill
         } else {
             egui::Color32::TRANSPARENT
         };
