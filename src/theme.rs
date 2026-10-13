@@ -56,6 +56,8 @@ const LIGHT: Palette = Palette {
 pub fn apply(ctx: &Context) {
     ctx.set_visuals_of(Theme::Dark, visuals(Visuals::dark(), &DARK_DIMMED));
     ctx.set_visuals_of(Theme::Light, visuals(Visuals::light(), &LIGHT));
+    // egui waits 0.5 s by default before showing tooltips, which feels sluggish on icon-only buttons.
+    ctx.all_styles_mut(|style| style.interaction.tooltip_delay = 0.15);
 }
 
 fn visuals(mut v: Visuals, p: &Palette) -> Visuals {
