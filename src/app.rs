@@ -85,17 +85,17 @@ impl App {
         const GAP: f32 = 8.0;
         let items = [
             (
-                egui::include_image!("../static/images/home.svg"),
+                egui::include_image!("../static/images/home.png"),
                 "Home",
                 Route::Home,
             ),
             (
-                egui::include_image!("../static/images/about.svg"),
+                egui::include_image!("../static/images/about.png"),
                 "About",
                 Route::About,
             ),
             (
-                egui::include_image!("../static/images/posts.svg"),
+                egui::include_image!("../static/images/posts.png"),
                 "Posts",
                 Route::Posts,
             ),
@@ -143,7 +143,7 @@ impl App {
                 }
                 let github = icon_button(
                     ui,
-                    egui::include_image!("../static/images/github.svg"),
+                    egui::include_image!("../static/images/github.png"),
                     "github.com/dxps",
                     false,
                 );
@@ -162,7 +162,7 @@ impl App {
         let block = ui.vertical_centered(|ui| {
             ui.add(
                 egui::Image::new(egui::include_image!("../static/images/dxps_logo.png"))
-                    .max_width(96.0),
+                    .max_width(144.0),
             );
             ui.add_space(12.0);
             ui.heading("dxps");

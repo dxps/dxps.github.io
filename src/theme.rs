@@ -1,6 +1,8 @@
 //! GitHub "Dark Dimmed" and "Light" palettes (from Primer), mapped onto egui visuals.
 
-use eframe::egui::{Color32, Context, Stroke, Theme, Visuals, style::WidgetVisuals};
+use eframe::egui::{
+    Color32, Context, Stroke, Theme, Visuals, epaint::Shadow, style::WidgetVisuals,
+};
 
 struct Palette {
     canvas: Color32,
@@ -14,6 +16,7 @@ struct Palette {
     selection: Color32,
     hover: Color32,
     active: Color32,
+    shadow_alpha: u8,
 }
 
 const fn rgb(hex: u32) -> Color32 {
@@ -32,6 +35,7 @@ const DARK_DIMMED: Palette = Palette {
     selection: rgb(0x264466),
     hover: rgb(0x373e47),
     active: rgb(0x444c56),
+    shadow_alpha: 140,
 };
 
 const LIGHT: Palette = Palette {
@@ -46,6 +50,7 @@ const LIGHT: Palette = Palette {
     selection: rgb(0xb6e3ff),
     hover: rgb(0xeaeef2),
     active: rgb(0xd0d7de),
+    shadow_alpha: 62,
 };
 
 pub fn apply(ctx: &Context) {
@@ -56,7 +61,15 @@ pub fn apply(ctx: &Context) {
 fn visuals(mut v: Visuals, p: &Palette) -> Visuals {
     v.panel_fill = p.canvas;
     v.window_fill = p.canvas;
-    v.window_stroke = Stroke::new(1.0, p.border);
+    // Tooltips and popups: no outline, and a centered (zero-offset) shadow so it spreads evenly on all sides.
+    v.window_stroke = Stroke::NONE;
+    v.popup_shadow = Shadow {
+        offset: [0, 0],
+        blur: 22,
+        spread: 2,
+        color: Color32::from_black_alpha(p.shadow_alpha),
+    };
+    v.window_shadow = v.popup_shadow;
     v.extreme_bg_color = p.inset;
     v.faint_bg_color = p.subtle;
     v.code_bg_color = p.subtle;
