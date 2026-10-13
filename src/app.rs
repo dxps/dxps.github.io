@@ -161,10 +161,8 @@ impl App {
         ui.add_space(((ui.available_height() - self.home_height) / 2.0).max(0.0));
         let block = ui.vertical_centered(|ui| {
             ui.add(
-                egui::Image::new(egui::include_image!(
-                    "../static/images/dxps_spartan_logo_transp_200x200.png"
-                ))
-                .max_width(160.0),
+                egui::Image::new(egui::include_image!("../static/images/dxps_logo.png"))
+                    .max_width(96.0),
             );
             ui.add_space(12.0);
             ui.heading("dxps");
