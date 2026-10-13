@@ -1,6 +1,7 @@
 use eframe::egui::{self, Align, Layout, ThemePreference};
 use egui_commonmark::{CommonMarkCache, CommonMarkViewer};
 
+use crate::lab;
 use crate::posts::{self, Post};
 
 #[derive(Clone, PartialEq, Debug)]
@@ -9,6 +10,8 @@ enum Route {
     About,
     Posts,
     Post(String),
+    Lab,
+    LabSample(String),
 }
 
 impl Route {
@@ -17,10 +20,22 @@ impl Route {
         match path.trim_matches('/') {
             "about" => Route::About,
             "posts" => Route::Posts,
-            p => match p.strip_prefix("posts/") {
-                Some(slug) if !slug.is_empty() => Route::Post(slug.to_owned()),
+            "lab" => Route::Lab,
+            p => match (p.strip_prefix("posts/"), p.strip_prefix("lab/")) {
+                (Some(slug), _) if !slug.is_empty() => Route::Post(slug.to_owned()),
+                (_, Some(slug)) if !slug.is_empty() => Route::LabSample(slug.to_owned()),
                 _ => Route::Home,
             },
+        }
+    }
+
+    /// The toolbar item a route belongs to: a post or a lab sample highlights its list's icon.
+    fn section(&self) -> &'static str {
+        match self {
+            Route::Home => "home",
+            Route::About => "about",
+            Route::Posts | Route::Post(_) => "posts",
+            Route::Lab | Route::LabSample(_) => "lab",
         }
     }
 
@@ -30,6 +45,8 @@ impl Route {
             Route::About => "/about".into(),
             Route::Posts => "/posts".into(),
             Route::Post(slug) => format!("/posts/{slug}"),
+            Route::Lab => "/lab".into(),
+            Route::LabSample(slug) => format!("/lab/{slug}"),
         }
     }
 }
@@ -38,6 +55,8 @@ pub struct App {
     route: Route,
     posts: Vec<Post>,
     markdown: CommonMarkCache,
+    // Built on first visit: the demos are only paid for when opened.
+    egui_map: Option<egui_map::map::Map>,
     home_height: f32,
 }
 
@@ -58,6 +77,7 @@ impl App {
             route: Route::from_path(&location_path()),
             posts,
             markdown: CommonMarkCache::default(),
+            egui_map: None,
             home_height: 0.0,
         }
     }
@@ -99,9 +119,14 @@ impl App {
                 "Posts",
                 Route::Posts,
             ),
+            (
+                egui::include_image!("../static/images/lab.png"),
+                "Lab",
+                Route::Lab,
+            ),
         ];
-        // GitHub link is the 4th item of the centered group.
-        let group_width = ICON_BOX * 4.0 + GAP * 3.0;
+        // GitHub link is the 5th item of the centered group.
+        let group_width = ICON_BOX * 5.0 + GAP * 4.0;
 
         let (_, row) = ui.allocate_space(egui::vec2(ui.available_width(), ICON_BOX));
 
@@ -137,8 +162,7 @@ impl App {
                 ui.spacing_mut().item_spacing.x = GAP;
                 ui.add_space(((row.width() - group_width) / 2.0).max(0.0));
                 for (source, tooltip, route) in items {
-                    let active =
-                        std::mem::discriminant(&self.route) == std::mem::discriminant(&route);
+                    let active = route.section() == self.route.section();
                     if icon_button(ui, source, tooltip, active).clicked() {
                         self.go(route);
                     }
@@ -198,6 +222,42 @@ impl App {
         }
     }
 
+    fn lab_list(&mut self, ui: &mut egui::Ui) {
+        ui.heading("lab");
+        ui.label("Small implementation examples and demos.");
+        ui.separator();
+        let mut target = None;
+        for sample in lab::SAMPLES {
+            if lab_entry(ui, sample).clicked() {
+                target = Some(Route::LabSample(sample.slug.to_owned()));
+            }
+        }
+        if let Some(route) = target {
+            self.go(route);
+        }
+    }
+
+    fn lab_sample(&mut self, ui: &mut egui::Ui, slug: &str) {
+        let Some(sample) = lab::find(slug) else {
+            ui.heading("Not found");
+            ui.label("There is no such sample.");
+            return;
+        };
+        ui.horizontal(|ui| {
+            ui.heading(sample.title);
+            ui.hyperlink_to("source", sample.source_url);
+        });
+        ui.label(sample.description);
+        ui.separator();
+        match sample.slug {
+            "egui-map" => {
+                let map = self.egui_map.get_or_insert_with(lab::egui_map_demo);
+                ui.add(map);
+            }
+            _ => {}
+        }
+    }
+
     fn post(&mut self, ui: &mut egui::Ui, slug: &str) {
         let Some(post) = self.posts.iter().find(|p| p.slug == slug) else {
             ui.heading("Not found");
@@ -233,6 +293,11 @@ impl eframe::App for App {
                 self.home(ui);
                 return;
             }
+            // The map owns drag and wheel input, so it can't live inside a scroll area.
+            if let Route::LabSample(slug) = self.route.clone() {
+                self.lab_sample(ui, &slug);
+                return;
+            }
             egui::ScrollArea::vertical()
                 .auto_shrink(false)
                 .show(ui, |ui| {
@@ -250,6 +315,8 @@ impl eframe::App for App {
                             Route::About => self.about(ui),
                             Route::Posts => self.posts_list(ui),
                             Route::Post(slug) => self.post(ui, &slug),
+                            Route::Lab => self.lab_list(ui),
+                            Route::LabSample(_) => {}
                         }
                     });
                 });
@@ -291,6 +358,42 @@ fn location_origin() -> String {
 
 #[cfg(not(target_arch = "wasm32"))]
 fn push_location_path(_path: &str) {}
+
+/// A whole-row clickable entry. The hover fill is the toolbar buttons' one; it is painted
+/// behind the text, into a slot reserved before the content's size is known.
+fn lab_entry(ui: &mut egui::Ui, sample: &lab::Sample) -> egui::Response {
+    const PAD: f32 = 8.0;
+    let background = ui.painter().add(egui::Shape::Noop);
+    let content = ui.scope(|ui| {
+        ui.set_width(ui.available_width());
+        ui.add_space(PAD);
+        ui.horizontal(|ui| {
+            ui.add_space(PAD);
+            ui.vertical(|ui| {
+                // Non-selectable labels, otherwise they would swallow the click.
+                ui.add(
+                    egui::Label::new(
+                        egui::RichText::new(sample.title).color(ui.visuals().hyperlink_color),
+                    )
+                    .selectable(false),
+                );
+                ui.add(egui::Label::new(sample.description).selectable(false));
+            });
+        });
+        ui.add_space(PAD);
+    });
+    let rect = content.response.rect;
+    let response = ui
+        .interact(rect, ui.id().with(sample.slug), egui::Sense::click())
+        .on_hover_cursor(egui::CursorIcon::PointingHand);
+    if response.hovered() {
+        ui.painter().set(
+            background,
+            egui::Shape::rect_filled(rect, 6.0, ui.visuals().widgets.hovered.bg_fill),
+        );
+    }
+    response
+}
 
 /// Square, borderless icon button. The SVGs are white so the tint alone decides their color.
 fn icon_button(

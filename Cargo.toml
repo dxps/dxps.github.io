@@ -6,6 +6,7 @@ publish = false
 
 [dependencies]
 eframe = { version = "0.36", default-features = false, features = ["glow", "default_fonts", "web_screen_reader"] }
+egui-map = "0.14"
 egui_commonmark = { version = "0.25", default-features = false, features = ["load-images", "fetch"] }
 egui_extras = { version = "0.36", features = ["image", "http"] }
 image = { version = "0.25", default-features = false, features = ["png"] }

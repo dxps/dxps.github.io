@@ -1,4 +1,5 @@
 mod app;
+mod lab;
 mod posts;
 mod theme;
 
